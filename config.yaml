@@ -23,4 +23,4 @@ command: "YOUR_BASE_DIRECTORY/run_main"
 
 run_type: "train"
 
-run_name: "eval_musicnet_full_with_classes_on_urmp_bon"
+run_name: "your_run_name"  # must not contain spaces. this will be part of the logdir path
