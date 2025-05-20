@@ -1,0 +1,23 @@
+#!/bin/bash
+echo Starting
+source ~/.bashrc
+
+START_TIME=$(date +%s)
+echo -e "[START] $(date)\nJobID=${SLURM_JOB_ID}\nHost=$(hostname)\nLogdir=${LOGDIR}\n-----------------------" >> "${LOGDIR}/job_launch.log"
+ldd --version
+nvidia-smi
+echo slurm id $SLURM_JOB_ID
+echo slurm job name $SLURM_JOB_NAME
+echo slurm job node list $SLURM_JOB_NODELIST
+echo slurm node id $SLURM_NODEID
+echo slurm num nodes $SLURM_JOB_NUM_NODES
+echo cpu per task $SLURM_CPUS_PER_TASK
+PATH_TO_ENV/bin/python -V
+PATH_TO_ENV/bin/python main.py "$@"
+
+END_TIME=$(date +%s)
+RUNTIME=$((END_TIME - START_TIME))
+RUNTIME_FMT=$(printf '%02d:%02d:%02d' $((RUNTIME/3600)) $((RUNTIME%3600/60)) $((RUNTIME%60)))
+
+echo Finished
+echo -e "[END] $(date)\nJobID=${SLURM_JOB_ID}\nRuntime=${RUNTIME_FMT} (hh:mm:ss)\n-----------------------" >> "${LOGDIR}/job_launch.log"

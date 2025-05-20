@@ -1,0 +1,26 @@
+slurm_params:
+  job-name: "name_of_job" # name of the job
+  output: "slurmlog.out" # redirect stdout
+  error: "slurmlog.err" # redirect stderr
+  partition: studentkillable # (see resources section)
+  time: "240" # max time (minutes)
+  signal: "USR1@120" # how to end job when time�s up
+  nodes: "1" # number of machines
+  ntasks: "1" # number of processes
+  mem: "16000" # CPU memory (MB)
+  cpus-per-task: "8" # CPU cores per process
+  gpus: "1" # GPUs in tota
+  # constraint: "titan_xp"
+  exclude: "s-002"
+
+train_params:
+
+
+inference_params:
+
+
+command: "/home/dcor/jonathany/transcription_counting/run_main"
+
+run_type: "train"
+
+run_name: "eval_musicnet_full_with_classes_on_urmp_bon"
